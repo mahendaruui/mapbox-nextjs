@@ -1,34 +1,17 @@
-import { React } from 'react';
+import { useEffect, useState } from 'react';
 import tw from 'tailwind-styled-components';
-const RidesSelector = () => {
-  const carList = [
-    {
-      imgUrl: 'https://i.ibb.co/cyvcpfF/uberx.png',
-      service: 'UberX',
-      multiplier: 1
-    },
-    {
-      imgUrl: 'https://i.ibb.co/YDYMKny/uberxl.png',
-      service: 'UberXL',
-      multiplier: 1.5
-    },
-    {
-      imgUrl: 'https://i.ibb.co/Xx4G91m/uberblack.png',
-      service: 'Black',
-      multiplier: 2
-    },
-    {
-      imgUrl: 'https://i.ibb.co/cyvcpfF/uberx.png',
-      service: 'Comfort',
-      multiplier: 1.2
-    },
-    {
-      imgUrl: ' https://i.ibb.co/1nStPWT/uberblacksuv.png',
-      service: 'Black SUV',
-      multiplier: 2.8
-    }
-  ];
-
+import {carList} from '../data/carList';
+const RidesSelector = ({ pickupcoordinates, dropoffCoordinates }) => {
+  const [rideDuration, setRideDuration] = useState(0);
+  // 
+  useEffect(() => {
+    fetch(
+      `https://api.mapbox.com/directions/v5/mapbox/driving/${pickupcoordinates[0]},${pickupcoordinates[1]};${dropoffCoordinates[0]},${dropoffCoordinates[1]}?access_token=pk.eyJ1IjoiaGVuZGFydGVhIiwiYSI6ImNreHp2YzlwcTdkNHgydXN0b2lvcjNmeWgifQ.KkhabDdcX_efZd2fiIzg6Q`
+    )
+    .then(res=>res.json())
+    .then(data=>{setRideDuration(data.routes[0].duration / 100)}
+    )
+  }, [pickupcoordinates, dropoffCoordinates]);
   return (
     <Wrapper>
       <Title>Pilih kendaraan anda, atau scroll lihat lebih banyak </Title>
@@ -40,7 +23,7 @@ const RidesSelector = () => {
               <Service>{car.service}</Service>
               <Time> {car.multiplier} Menit </Time>
             </CarDetail>
-            <Price>Rp. 70.000</Price>
+            <Price>{'Rp.' + (rideDuration*car.multiplier).toFixed(3)}</Price>
           </Car>
         ))}
       </Carlist>
