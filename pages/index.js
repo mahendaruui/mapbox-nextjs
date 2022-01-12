@@ -10,7 +10,10 @@ export default function Home() {
       <ActionItem>
         {/* header */}
         <Header>
-          <UberLogo src="https://www.logo.wine/a/logo/Uber/Uber-Logo.wine.svg"></UberLogo>
+          <div className='flex items-center'>
+            <UberLogo src="./img/moda.png"></UberLogo>
+            <div className=''>Moda<sup className='text-xs ml-1 italic'>ltd</sup></div>
+          </div>
           <Profile>
             <Name>Mahendar</Name>
             <UserImage src="./img/profile.png" />
@@ -49,7 +52,7 @@ export default function Home() {
 const Wrapper = tw.div`flex flex-col h-screen`;
 const ActionItem = tw.div`flex-1 p-4`;
 const Header = tw.div`flex justify-between`;
-const UberLogo = tw.img`h-28`;
+const UberLogo = tw.img`h-20`;
 const Profile = tw.div`flex items-center`;
 const Name = tw.div`mr-4 w-40 text-sm text-right`;
 const UserImage = tw.img`h-12 w-12 rounded-full border border-gray-200 p-px`;

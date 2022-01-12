@@ -6,27 +6,27 @@ const RidesSelector = ({ pickupcoordinates, dropoffCoordinates }) => {
   const carList = [
     {
       imgUrl: 'https://i.ibb.co/cyvcpfF/uberx.png',
-      service: 'UberX',
+      service: 'Ekonomi',
       multiplier: 1,
     },
     {
       imgUrl: 'https://i.ibb.co/YDYMKny/uberxl.png',
-      service: 'UberXL',
+      service: 'Bisnis',
       multiplier: 1.5,
     },
     {
       imgUrl: 'https://i.ibb.co/Xx4G91m/uberblack.png',
-      service: 'Black',
+      service: 'Eksekutif',
       multiplier: 2,
     },
     {
       imgUrl: 'https://i.ibb.co/cyvcpfF/uberx.png',
-      service: 'Comfort',
-      multiplier: 1.2,
+      service: 'VIP',
+      multiplier: 2.2,
     },
     {
       imgUrl: ' https://i.ibb.co/1nStPWT/uberblacksuv.png',
-      service: 'Black SUV',
+      service: 'VVIP',
       multiplier: 2.8,
     }
   ]
@@ -51,7 +51,7 @@ const RidesSelector = ({ pickupcoordinates, dropoffCoordinates }) => {
           <Car key={index}>
             <CarImage src={car.imgUrl} />
             <CarDetail>
-              <Service>{car.service}</Service>
+              <Service>Moda - {car.service}</Service>
               <Time> {car.multiplier} Menit </Time>
             </CarDetail>
             <Price>{'Rp.' + (rideDuration*car.multiplier).toFixed(3)}</Price>
