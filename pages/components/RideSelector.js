@@ -52,7 +52,7 @@ const RidesSelector = ({ pickupcoordinates, dropoffCoordinates }) => {
             <CarImage src={car.imgUrl} />
             <CarDetail>
               <Service>Moda - {car.service}</Service>
-              <Time> {car.multiplier} Menit </Time>
+              <Time> 10 Menit </Time>
             </CarDetail>
             <Price>{'Rp.' + (rideDuration*car.multiplier).toFixed(3)}</Price>
           </Car>
