@@ -1,9 +1,29 @@
-/* eslint-disable react/react-in-jsx-scope */
+import { useEffect, useState } from 'react';
 import tw from 'tailwind-styled-components';
 import Map from './components/map';
 import Link from 'next/link';
+import { auth } from '../firebase';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+  const [user, setUser] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    return onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser({
+          name: user.displayName,
+          photoUrl: user.photoURL
+        });
+      } else {
+        setUser(null);
+        router.push('/login');
+      }
+    });
+  }, []);
+
   return (
     <Wrapper>
       <Map />
@@ -17,28 +37,28 @@ export default function Home() {
             </div>
           </div>
           <Profile>
-            <Name>Mahendar</Name>
-            <UserImage src="./img/profile.png" />
+            <Name>{user && user.name}</Name>
+            <UserImage src={user && user.photoUrl} onClick={() => signOut(auth)} />
           </Profile>
         </Header>
         <ActionButtons>
           <Link href="/search">
             <ActionButton>
               <ActionButtonImage src="./img/Car2.png" />
-              Ride
+              Mobil
             </ActionButton>
           </Link>
 
           {/* <Link href="/search"> */}
           <ActionButton>
             <ActionButtonImage src="./img/wheels.png" />
-            Wheels
+            Sepeda
           </ActionButton>
           {/* </Link> */}
           {/* <Link href="/search"> */}
           <ActionButton>
             <ActionButtonImage src="./img/reserver.png" />
-            Reserve
+            Jadwal
           </ActionButton>
           {/* </Link> */}
         </ActionButtons>
@@ -57,7 +77,7 @@ const Header = tw.div`flex justify-between`;
 const UberLogo = tw.img`h-20 sm:h-28`;
 const Profile = tw.div`flex items-center`;
 const Name = tw.div`mr-4 w-40 text-sm text-right`;
-const UserImage = tw.img`h-12 w-12 rounded-full border border-gray-200 p-px`;
+const UserImage = tw.img`h-12 w-12 rounded-full border border-gray-200 p-px cursor-pointer`;
 const ActionButtons = tw.div`flex text-center sm:p-5`;
 const ActionButton = tw.div`flex bg-gray-200 flex-1 m-1  h-32 items-center p-5 flex-col justify-center rounded-lg transform hover:scale-105 transition text-xl cursor-pointer`;
 const ActionButtonImage = tw.img`h-3/5`;
