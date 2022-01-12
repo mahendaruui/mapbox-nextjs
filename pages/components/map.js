@@ -38,4 +38,4 @@ const Map = (props) => {
 
 export default Map;
 
-const Wrapper = tw.div`flex-1`;
+const Wrapper = tw.div`flex-1 border border-gray-400`;

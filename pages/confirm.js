@@ -3,7 +3,7 @@ import tw from 'tailwind-styled-components';
 import Map from './components/map';
 import { useRouter } from 'next/router';
 import RidesSelector from './components/RideSelector';
-import Link from 'next/link'
+import Link from 'next/link';
 
 const Confirm = () => {
   const router = useRouter();
@@ -56,9 +56,9 @@ const Confirm = () => {
           dropoffCoordinates={dropoffCoordinates}
         />
         <ConfirmButtonContainer>
-        <Link href="/">
-         <button className='flex-1 bg-gray-500 m-4 py-4 text-white'> Back </button>
-        </Link>
+          <Link href="/">
+            <button className="flex-1 bg-gray-500 m-4 py-4 text-white"> Back </button>
+          </Link>
           <ConfirmButton>Konfirmasi</ConfirmButton>
         </ConfirmButtonContainer>
       </RideContainer>
@@ -68,7 +68,7 @@ const Confirm = () => {
 
 export default Confirm;
 
-const Wrapper = tw.div`flex h-screen flex-col`;
+const Wrapper = tw.div`flex h-screen flex-col sm:flex-row`;
 const RideContainer = tw.div`flex flex-1 flex-col`;
 const ConfirmButtonContainer = tw.div`flex border-t-2`;
 const ConfirmButton = tw.button`flex-1 bg-black text-white m-4 py-4 `;
